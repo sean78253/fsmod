@@ -25,6 +25,9 @@ add3 varchar(35),
 city varchar(35) NOT NULL,
 st varchar(35) NOT NULL,
 courntry varchar(35) NOT NULL DEFAULT 'US',
-postcode varchar(35) NOT NULL
+postcode varchar(35) NOT NULL,
+created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+deact TIMESTAMP,
+balanace DECIMAL(6,2)
 )""")
 cursor.close()
