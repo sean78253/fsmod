@@ -37,8 +37,8 @@ account_status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE') ENGINE=INNODB
 
 cursor.execute("""CREATE TABLE Sensor(
 Customer_id INT NOT NULL,
-INDEX Customer_ind (Customer_id), \
-FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE, \
+INDEX CustomerSensor_ind (Customer_id), 
+FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE, 
 datesample TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cm varchar(20) NOT NULL,
 sensorserial varchar(50) NOT NULL,
@@ -46,13 +46,15 @@ sensortype varchar(2) NOT NULL,
 sensordata DECIMAL(5,5) NOT NULL) ENGINE=INNODB
 """)
 
-statement="CREATE TABLE Notes( \
-Customer_id INT NOT NULL, \
-INDEX Customer_ind (Customer_id), \
-FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE, \
-Person_id INT not null, \
-date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \
-priority varchar(10), \
-Note Tinyblob) ENGINE=INNODB"
-cursor.execute(statement)
+cursor.execute("""CREATE TABLE Notes(
+Customer_id INT NOT NULL,
+INDEX CustomerNotes_ind (Customer_id),
+FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE,
+Person_id INT not null,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+priority varchar(10),
+Note Tinyblob) ENGINE=INNODB
+""")
+
 cursor.close()
+
