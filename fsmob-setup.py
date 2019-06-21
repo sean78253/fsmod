@@ -10,8 +10,7 @@ cursor = fsmob.cursor()
 cursor.execute("DROP DATABASE IF EXISTS fsmob")
 cursor.execute("DROP USER IF EXISTS 'fsmob'@'localhost'")
 
-statement = """CREATE USER 'fsmob'@'localhost' IDENTIFIED BY 'password'"""
-cursor.execute(statement)
+cursor.execute("""CREATE USER 'fsmob'@'localhost' IDENTIFIED BY 'password'""")
 cursor.execute("CREATE DATABASE fsmob")
 cursor.execute("GRANT ALL PRIVILEGES ON fsmob.* TO 'fsmob'@'localhost'")
 cursor.execute("FLUSH PRIVILEGES")
