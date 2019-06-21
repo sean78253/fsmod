@@ -6,6 +6,7 @@ fsmob = MySQLdb.connect(host = 'localhost',
                        passwd = 'password')
 cursor = fsmob.cursor()
 
+
 #This is a distructive process, we delete everything first.
 cursor.execute("DROP DATABASE IF EXISTS fsmob")
 cursor.execute("DROP USER IF EXISTS 'fsmob'@'localhost'")
@@ -52,7 +53,8 @@ FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE,
 Person_id INT not null,
 date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 priority varchar(10),
-Note Tinyblob) ENGINE=INNODB
+Note Tinyblob,
+INDEX Notes_idx (Customer_id, Person_id)) ENGINE=INNODB
 """)
 
 cursor.close()
