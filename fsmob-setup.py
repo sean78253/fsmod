@@ -20,7 +20,7 @@ cursor.execute("USE fsmob")
 # Create tables
 
 cursor.execute("""CREATE TABLE Customer(
-id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+Customer_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name varchar(35) NOT NULL,
 add1 varchar(35) NOT NULL,
 add2 varchar(35),
@@ -36,7 +36,7 @@ account_status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE'
 )""")
 
 cursor.execute("""CREATE TABLE Sensor(
-id INT NOT NULL,
+Customer_id INT NOT NULL,
 datesample TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cm varchar(20) NOT NULL,
 sensorserial varchar(50) NOT NULL,
@@ -44,12 +44,15 @@ sensortype varchar(2) NOT NULL,
 sensordata DECIMAL(5,5) NOT NULL
 )""")
 
-cursor.execute("""CREATE TABLE Notes(
-id INT NOT NULL,
-date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-priority varchar(10),
-personID int,
-Note Tinyblob
-)""")
-
+statement="CREATE TABLE Notes( \
+Customer_id INT NOT NULL, \
+INDEX Customer_ind (Customer_id), \
+FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE, \
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \
+priority varchar(10), \
+Note Tinyblob) ENGINE=INNODB"
+print()
+print(statement)
+print()
+cursor.execute(statement)
 cursor.close()
