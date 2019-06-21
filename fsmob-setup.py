@@ -16,8 +16,11 @@ cursor.execute("CREATE DATABASE fsmob")
 cursor.execute("GRANT ALL PRIVILEGES ON fsmob.* TO 'fsmob'@'localhost'")
 cursor.execute("FLUSH PRIVILEGES")
 cursor.execute("USE fsmob")
+
+# Create tables
+
 cursor.execute("""CREATE TABLE Customer(
-id varchar(20) PRIMARY KEY NOT NULL,
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 name varchar(35) NOT NULL,
 add1 varchar(35) NOT NULL,
 add2 varchar(35),
@@ -28,6 +31,25 @@ courntry varchar(35) NOT NULL DEFAULT 'US',
 postcode varchar(35) NOT NULL,
 created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 deact TIMESTAMP,
-balanace DECIMAL(6,2)
+balanace DECIMAL(6,2),
+account_status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE'
 )""")
+
+cursor.execute("""CREATE TABLE Sensor(
+id INT NOT NULL,
+datesample TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+cm varchar(20) NOT NULL,
+sensorserial varchar(50) NOT NULL,
+sensortype varchar(2) NOT NULL,
+sensordata DECIMAL(5,5) NOT NULL
+)""")
+
+cursor.execute("""CREATE TABLE Notes(
+id INT NOT NULL,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+priority varchar(10),
+personID int,
+Note Tinyblob
+)""")
+
 cursor.close()
