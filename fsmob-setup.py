@@ -46,6 +46,11 @@ last_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 INDEX Cluster_Seen_ind (Customer_id, Cluster, date_added)) ENGINE=INNODB
 """)
 
+cursor.execute("""CREATE TABLE SensorType(
+sensortype varchar(2) NOT NULL PRIMARY KEY,
+description varchar(20) NOT NULL) ENGINE=INNODB
+""")
+
 cursor.execute("""CREATE TABLE Sensor(
 Customer_id INT NOT NULL,
 INDEX CustomerSensor_ind (Customer_id), 
@@ -61,9 +66,22 @@ cursor.execute("""CREATE TABLE Notes(
 Customer_id INT NOT NULL,
 INDEX CustomerNotes_ind (Customer_id),
 FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE,
-Person_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+person_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+salutation varchar(10),
+fname varchar(20),
+lname varchar(20),
+phone1 varchar(20),
+phone1_desc varchar(10),
+phone2 varchar(20),
+phone2_desc varchar(10),
+phone3 varchar(20),
+phone3_desc varchar(10),
 date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 priority varchar(10),
+challange varchar(255) NOT NULL DEFAULT 'CHANGE ME',
+response varchar(255) NOT NULL DEFAULT 'I WILL',
+created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+deact TIMESTAMP,
 Note Tinyblob,
 INDEX Notes_idx (Customer_id, Person_id)) ENGINE=INNODB
 """)
