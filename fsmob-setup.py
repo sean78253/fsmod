@@ -35,6 +35,8 @@ balanace DECIMAL(6,2),
 account_status VARCHAR(10) NOT NULL DEFAULT 'ACTIVE') ENGINE=INNODB
 """)
 
+cursor.execute("""ALTER TABLE Customer AUTO_INCREMENT=100""")
+
 cursor.execute("""CREATE TABLE ClusterMonitor(
 Customer_id INT NOT NULL,
 INDEX Cluster_Customer_ind (Customer_id),
@@ -51,10 +53,16 @@ sensortype varchar(2) NOT NULL PRIMARY KEY,
 description varchar(20) NOT NULL) ENGINE=INNODB
 """)
 
+cursor.execute("""INSERT INTO SensorType (sensortype, description) VALUES ('TP','TEMPATURE')""")
+cursor.execute("""INSERT INTO SensorType (sensortype, description) VALUES ('VT','VOLTAGE')""")
+cursor.execute("""INSERT INTO SensorType (sensortype, description) VALUES ('AM','AMPRAGE')""")
+
+
 cursor.execute("""CREATE TABLE Sensor(
 Customer_id INT NOT NULL,
 INDEX CustomerSensor_ind (Customer_id), 
 FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE, 
+FOREIGN KEY (sensortype) REFERENCES SensorType(sensortype) ON DELETE CASCADE,
 datesample TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 cm varchar(17) NOT NULL,
 sensorserial varchar(50) NOT NULL,
@@ -86,8 +94,7 @@ Note Tinyblob,
 INDEX Notes_idx (Customer_id, Person_id)) ENGINE=INNODB
 """)
 
-cursor.execute(""" ALTER TABLE Customer AUTO_INCREMENT=100 """)
-cursor.execute(""" ALTER TABLE Notes AUTO_INCREMENT=100 """)
+cursor.execute("""ALTER TABLE Notes AUTO_INCREMENT=100""")
 
 cursor.close()
 
