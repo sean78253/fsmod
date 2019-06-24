@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import MySQLdb
 import mysql.connector
 # set up the login Need to figure out a crypto bag system for security.
