@@ -10,3 +10,4 @@ Work in progress: Setting up the main servers
 2019 06 20 - clean up add foreign key links to the customer master file to cascade delete data for customers departing - think about archiving data before delete in CSV
 2019 06 19 - rethink the indexes for tables to reflect real world need - no pushes today
 
+Note: This project is maintained but the code has gone non-public aside from what you see here.
